@@ -1,151 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8" />
-    <title>Unity Web Player | 115Arming</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
-    <link rel="stylesheet" href="TemplateData/style.css" />
-
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        overflow: hidden;
-      }
-
-      /* 3:4 비율 강제 래퍼 (데스크탑 / 태블릿 가로) */
-      #aspect-wrapper {
-        position: absolute;
-        inset: 0;
-        margin: auto;
-        aspect-ratio: 3 / 5;
-        max-height: 100vh;
-        max-width: calc(100vh * 0.75);
-        background: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #unity-container,
-      #unity-canvas {
-        width: 100%;
-        height: 100%;
-      }
-
-      /* 모바일 세로에서는 강제 비율 해제 */
-      body.mobile #aspect-wrapper {
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        aspect-ratio: auto;
-        max-width: none;
-        max-height: none;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="aspect-wrapper">
-      <div id="unity-container">
-        <canvas id="unity-canvas" tabindex="-1"></canvas>
-
-        <div id="unity-loading-bar">
-          <div id="unity-logo"></div>
-          <div id="unity-progress-bar-empty">
-            <div id="unity-progress-bar-full"></div>
-          </div>
-        </div>
-
-        <div id="unity-warning"></div>
-
-        <div id="unity-footer">
-          <div id="unity-logo-title-footer"></div>
-          <div id="unity-fullscreen-button"></div>
-          <div id="unity-build-title">115Arming</div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const canvas = document.querySelector("#unity-canvas");
-
-      function unityShowBanner(msg, type) {
-        const warningBanner = document.querySelector("#unity-warning");
-        const div = document.createElement("div");
-        div.innerHTML = msg;
-        div.style.padding = "10px";
-        div.style.background = type === "error" ? "red" : "yellow";
-        warningBanner.appendChild(div);
-
-        if (type !== "error") {
-          setTimeout(() => {
-            warningBanner.removeChild(div);
-          }, 5000);
-        }
-      }
-
-      const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/115arming 20260124.loader.js";
-
-      const config = {
-        dataUrl: buildUrl + "/115arming 20260124.data.unityweb",
-        frameworkUrl: buildUrl + "/115arming 20260124.framework.js.unityweb",
-        codeUrl: buildUrl + "/115arming 20260124.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "115Arming",
-        productVersion: "0.1.0",
-        showBanner: unityShowBanner,
-      };
-
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      const isLandscape = window.innerWidth > window.innerHeight;
-
-      if (isMobile && !isLandscape) {
-        // 📱 모바일 세로 → 전체 화면
-        document.body.classList.add("mobile");
-
-        const meta = document.createElement("meta");
-        meta.name = "viewport";
-        meta.content =
-          "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no";
-        document.head.appendChild(meta);
-      }
-
-      document.querySelector("#unity-loading-bar").style.display = "block";
-
-      const script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          document.querySelector("#unity-progress-bar-full").style.width =
-            100 * progress + "%";
-        })
-          .then((unityInstance) => {
-            document.querySelector("#unity-loading-bar").style.display = "none";
-            document.querySelector("#unity-fullscreen-button").onclick = () => {
-              unityInstance.SetFullscreen(1);
-            };
-          })
-          .catch((message) => {
-            alert(message);
-          });
-      };
-
-      document.body.appendChild(script);
-    </script>
-  </body>
-</html>
-
-<!----   26.01.24 :깃허브 화면 최적화... GPT 
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | 115Arming</title>
@@ -197,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/115arming 20260124.loader.js";
+      var loaderUrl = buildUrl + "/115arming 20260125.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/115arming 20260124.data.unityweb",
-        frameworkUrl: buildUrl + "/115arming 20260124.framework.js.unityweb",
-        codeUrl: buildUrl + "/115arming 20260124.wasm.unityweb",
+        dataUrl: buildUrl + "/115arming 20260125.data.unityweb",
+        frameworkUrl: buildUrl + "/115arming 20260125.framework.js.unityweb",
+        codeUrl: buildUrl + "/115arming 20260125.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "115Arming",
@@ -276,4 +131,3 @@
     </script>
   </body>
 </html>
---->
